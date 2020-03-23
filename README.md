@@ -11,7 +11,7 @@ yarn add @jesster2k10/react-native-range-slider
 ## Usage
 
 ```js
-import RangeSlider from "@jesster2k10/react-native-range-slider";
+import RangeSlider from '@jesster2k10/react-native-range-slider';
 
 // ...
 
@@ -19,7 +19,7 @@ import RangeSlider from "@jesster2k10/react-native-range-slider";
   min={0}
   max={100}
   onChange={(min, max) => console.log(min, max)}
-/>
+/>;
 ```
 
 ## License

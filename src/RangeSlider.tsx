@@ -58,9 +58,9 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   if (Platform.OS === 'android') {
     return (
       <Slider
-        min={min}
-        max={max}
-        step={step}
+        min={Number(min)}
+        max={Number(max)}
+        step={Number(step)}
         tintColor={tintColor}
         tintColorBetweenHandles={tintColorBetweenHandles}
         handleColor={handleColor}
@@ -81,8 +81,9 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     return (
       <Slider
         disableRange={type === 'slider'}
-        minValue={min}
-        maxValue={max}
+        minValue={Number(min)}
+        maxValue={Number(max)}
+        step={Number(step)}
         selectedMaximum={selectedMaximum}
         selectedMinimum={selectedMinimum}
         tintColor={tintColor}
@@ -106,7 +107,6 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         labelPadding={labelPadding}
         minDistance={minDistance}
         maxDistance={maxDistance}
-        step={step}
         onChange={handleChange}
         style={[defaultStyle, style]}
       />
