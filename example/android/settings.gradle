@@ -1,0 +1,6 @@
+rootProject.name = 'ReactNativeRangeSliderExample'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':jesster2k10reactnativerangeslider'
+project(':jesster2k10reactnativerangeslider').projectDir = new File(rootProject.projectDir, '../../android')
