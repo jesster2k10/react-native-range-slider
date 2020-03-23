@@ -5,7 +5,7 @@ React native cross platform range slider
 ## Installation
 
 ```sh
-npm install @jesster2k10/react-native-range-slider
+yarn add @jesster2k10/react-native-range-slider
 ```
 
 ## Usage
