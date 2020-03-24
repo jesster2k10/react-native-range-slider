@@ -48,8 +48,8 @@ export interface AndroidOnlyRangeSliderProps {
   leftHandlePressedColor?: string;
   rightHandlePressedColor?: string;
   handlePressedColor?: string;
-  minStartValue?: string;
-  maxStartValue?: string;
+  minStartValue?: number;
+  maxStartValue?: number;
   fixGap?: number;
   cornerRadius?: number;
 }

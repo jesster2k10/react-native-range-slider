@@ -16,7 +16,7 @@ class ReactNativeRangeSliderPackage : ReactPackage {
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         return mutableListOf(
-          RangeSliderManager()
+          RNRangeSliderManager()
         )
     }
 }

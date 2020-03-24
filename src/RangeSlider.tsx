@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { Platform, requireNativeComponent } from 'react-native';
 import { RangeSliderProps, RangeSliderChangeEvent } from './types';
 
-const Slider = requireNativeComponent('RangeSlider');
+const Slider = requireNativeComponent('RNRangeSlider');
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
   min,
@@ -14,9 +13,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   step,
   handleBorderColor,
   handleColor,
-  handleDiameter = Platform.select({
-    android: 10,
-  }),
+  handleDiameter,
   handleBorderWidth,
   type = 'range',
   selectedMaximum,
@@ -44,7 +41,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   minStartValue,
   maxStartValue,
   fixGap,
-  style,
+  style = {},
   cornerRadius,
 }: RangeSliderProps) => {
   const defaultStyle = {
@@ -72,8 +69,10 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         fixGap={fixGap}
         leftHandlePressedColor={leftHandlePressedColor}
         rightHandlePressedColor={rightHandlePressedColor}
-        handlePressedColor={handlePressedColor}
+        handlePressedColor={handlePressedColor || handleColor}
         cornerRadius={cornerRadius}
+        prefix={prefix}
+        suffix={suffix}
         style={[defaultStyle, style]}
       />
     );
@@ -112,6 +111,16 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
       />
     );
   }
+};
+
+RangeSlider.defaultProps = {
+  min: 0,
+  max: 100,
+  step: 1,
+  type: 'range',
+  selectedMinimum: 0,
+  selectedMaximum: 100,
+  tintColor: '#DCDCDC', // extra light gray
 };
 
 export default RangeSlider;

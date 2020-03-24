@@ -41,6 +41,18 @@ export default function App() {
           />
         </View>
         <View>
+          <Text style={styles.title}>Prefixed Slider</Text>
+          <RangeSlider
+            min={0}
+            max={100}
+            prefix="$"
+            onChange={onChange}
+            selectedMinimum={20}
+            selectedMaximum={40}
+            style={styles.slider}
+          />
+        </View>
+        <View>
           <Text style={styles.title}>Suffixed Slider</Text>
           <RangeSlider
             min={0}

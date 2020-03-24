@@ -10,7 +10,7 @@ import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerModule
 import java.lang.StringBuilder
 
-class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarChangeListener {
+class RNRangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarChangeListener {
   private var rangeSeekBar: CrystalRangeSeekbar
   private var minTextView: TextView?
   private var maxTextView: TextView?
@@ -18,13 +18,13 @@ class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarCh
   private var minValue: Float = 0f
   private var maxValue: Float = 100f
 
-  var suffix: String? = null
+  var suffix: String? = ""
     set(value) {
       field = value
       updateText()
     }
 
-  var prefix: String? = null
+  var prefix: String? = ""
     set(value) {
       field = value
       updateText()
@@ -34,6 +34,8 @@ class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarCh
     inflate(context, R.layout.range_slider, this)
     rangeSeekBar = findViewById(R.id.range_seek_bar)
     rangeSeekBar.setOnRangeSeekbarChangeListener(this)
+    rangeSeekBar.setMinStartValue(minValue)
+    rangeSeekBar.setMaxStartValue(maxValue)
 
     minTextView = findViewById(R.id.range_seek_bar_min)
     maxTextView = findViewById(R.id.range_seek_bar_max)

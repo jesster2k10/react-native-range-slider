@@ -1,1 +1,2 @@
-
+include ':rangeseekbar'
+project(':rangeseekbar').projectDir = new File('crystalrangeseekbar')
