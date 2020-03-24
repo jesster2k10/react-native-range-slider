@@ -10,13 +10,14 @@ export type RangeSliderChangeEvent = NativeSyntheticEvent<{
 export interface CommonRangeSliderProps {
   min: number;
   max: number;
-  onChange: (min: number, max: number) => void;
+  onChange?: (min: number, max: number) => void;
   tintColor?: string;
   tintColorBetweenHandles?: string;
   step?: number;
   handleColor?: string;
-  handleDiameter?: number;
   style?: object;
+  prefix?: string;
+  suffix?: string;
 }
 
 export interface IOSOnlyRangeSliderProps {
@@ -27,9 +28,8 @@ export interface IOSOnlyRangeSliderProps {
   handleBorderWidth?: number;
   minLabelColor?: string;
   maxLabelColor?: string;
+  handleDiameter?: number;
   lineHeight?: number;
-  prefix?: string;
-  suffix?: string;
   hideLabels?: boolean;
   minLabelFont?: string;
   maxLabelFont?: string;
