@@ -8,7 +8,7 @@ import com.facebook.react.uimanager.annotations.ReactProp
 
 class RangeSliderManager: SimpleViewManager<RangeSliderView>() {
   override fun getName(): String {
-    return "RangeSlider"
+    return "RNRangeSlider"
   }
 
   override fun createViewInstance(reactContext: ThemedReactContext): RangeSliderView {
@@ -104,6 +104,18 @@ class RangeSliderManager: SimpleViewManager<RangeSliderView>() {
     if (gap == null) return
     view.run { setFixGap(gap.toFloat()) }
 
+  }
+
+  @ReactProp(name = "suffix")
+  fun setSuffix(view: RangeSliderView, suffix: String?) {
+    if (suffix == null) return
+    view.suffix = suffix
+  }
+
+  @ReactProp(name = "prefix")
+  fun setPrefix(view: RangeSliderView, prefix: String?) {
+    if (prefix == null) return
+    view.prefix = prefix
   }
 
   override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any> {

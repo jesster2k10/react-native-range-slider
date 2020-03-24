@@ -9,7 +9,8 @@
 
 @class RCTEventDispatcher;
 
-@interface RangeSlider : UIView
+@interface RNRangeSlider : UIView
+
 // Define view properties here with @property
 @property (nonatomic, assign) float minValue;
 @property (nonatomic, assign) float maxValue;
@@ -31,7 +32,7 @@
 @property (nonatomic, assign) float lineBorderWidth;
 @property (nonatomic, assign) NSString* lineBorderColor;
 @property (nonatomic, assign) NSString* suffix;
-@property (nonatomic, assign) NSString* preffix;
+@property (nonatomic, assign) NSString* prefix;
 @property (nonatomic, assign) BOOL disableRange;
 @property (nonatomic, assign) BOOL hideLabels;
 

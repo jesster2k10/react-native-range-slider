@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RangeSlider.h"
+#import "RNRangeSlider.h"
 
 // import RCTEventDispatcher
 
@@ -25,7 +25,7 @@
 #import "UIColor+Hex.h"
 #import "TTRangeSlider.h"
 
-@implementation RangeSlider  {
+@implementation RNRangeSlider  {
 
     RCTEventDispatcher *_eventDispatcher;
 
@@ -135,7 +135,7 @@
     UIColor *color = [UIColor colorwithHexString:lineBorderColor alpha:1];
     [_rangeSlider setLineBorderColor:color];
 }
-- (void) setPreffix:(NSString *)preffix
+- (void) setPrefix:(NSString *)preffix
 {
     myPrefix = preffix;
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
@@ -223,8 +223,8 @@
 
 
         _rangeSlider = [[TTRangeSlider alloc] initWithFrame:CGRectZero];
-        _rangeSlider.minValue = _minValue ? _minValue:0;
-        _rangeSlider.maxValue = _maxValue ? _maxValue:100;
+        _rangeSlider.minValue = _minValue ? _minValue : 0;
+        _rangeSlider.maxValue = _maxValue ? _maxValue : 100;
         _rangeSlider.selectedMinimum = _selectedMinimum;
         _rangeSlider.selectedMaximum = _selectedMaximum;
 

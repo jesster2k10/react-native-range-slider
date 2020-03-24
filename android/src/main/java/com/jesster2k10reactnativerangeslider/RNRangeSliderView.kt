@@ -8,11 +8,27 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerModule
+import java.lang.StringBuilder
 
 class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarChangeListener {
   private var rangeSeekBar: CrystalRangeSeekbar
   private var minTextView: TextView?
   private var maxTextView: TextView?
+
+  private var minValue: Float = 0f
+  private var maxValue: Float = 100f
+
+  var suffix: String? = null
+    set(value) {
+      field = value
+      updateText()
+    }
+
+  var prefix: String? = null
+    set(value) {
+      field = value
+      updateText()
+    }
 
   init {
     inflate(context, R.layout.range_slider, this)
@@ -21,6 +37,7 @@ class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarCh
 
     minTextView = findViewById(R.id.range_seek_bar_min)
     maxTextView = findViewById(R.id.range_seek_bar_max)
+    updateText(minValue, maxValue)
   }
 
   fun setTintColorBetweenHandles(color: String) {
@@ -62,13 +79,15 @@ class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarCh
   }
 
   fun setMinValue(min: Float) {
-    minTextView?.text = min.toInt().toString()
+    minValue = min
     rangeSeekBar.setMinValue(min)
+    updateText(minValue, maxValue)
   }
 
   fun setMaxValue(max: Float) {
-    maxTextView?.text = max.toInt().toString()
+    maxValue = max
     rangeSeekBar.setMaxValue(max)
+    updateText(minValue, maxValue)
   }
 
   fun setMinStartValue(minStartValue: Float) {
@@ -87,11 +106,31 @@ class RangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbarCh
     rangeSeekBar.setSteps(steps)
   }
 
-  override fun valueChanged(min: Number?, max: Number?) {
-    minTextView?.text = min?.toInt()?.toString()
-    maxTextView?.text = max?.toInt()?.toString()
+  private fun updateText(min: Number? = null, max: Number? = null) {
+    var minText = minTextView?.text
+    var maxText = minTextView?.text
+    if (min !== null) {
+      minText = min.toString()
+    }
 
+    if (max !== null) {
+      maxText = max.toString()
+    }
+
+    minTextView?.text = StringBuilder()
+      .append(prefix)
+      .append(minText)
+      .append(suffix)
+
+    maxTextView?.text = StringBuilder()
+      .append(prefix)
+      .append(maxText)
+      .append(suffix)
+  }
+
+  override fun valueChanged(min: Number?, max: Number?) {
     if (max == null || min == null) return
+    updateText(min, max)
 
     val event = RangeSliderChangeEvent(rangeSeekBar.id)
     event.max = max.toDouble()
