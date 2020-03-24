@@ -8,6 +8,7 @@ A high-quality, cross platform, native iOS range slider for react native. A slid
 - Android Support
 - Native Code
 - Customizable
+- Typescript Support
 
 ## IOS Example
 
@@ -54,7 +55,7 @@ Modify your settings.gradle to include the following
 
 ```gradle
 include ':rangeseekbar'
-project(':rangeseekbar').projectDir = new File('../../node_modules/@jesster2k10/react-native-range-seekbar/crystalrangeseekbar')
+project(':rangeseekbar').projectDir = new File('../node_modules/@jesster2k10/react-native-range-slider/crystalrangeseekbar')
 ```
 
 ### Step Two
@@ -70,7 +71,28 @@ buildscript {
 }
 ```
 
-### Step Three
+### Step Three
+
+*NOTE: This only applies to react native versions greater than 0.60.0*
+
+Adjust your `react-native-config.js` to include the following:
+
+```js
+module.exports = {
+  dependencies: {
+    '@jesster2k10/react-native-range-slider': {
+      platforms: {
+        android: {
+          packageImportPath:
+            'import com.jesster2k10reactnativerangeslider.ReactNativeRangeSliderPackage;',
+        },
+      },
+    },
+  },
+}
+```
+
+### Step Four
 
 Modify your `AndroidManifest.xml` and set `android:allowBackup="true"`, see below for example:
 
@@ -114,12 +136,27 @@ You can check out the [examples](./example/src/App.tsx) for more usage.
 import RangeSlider from '@jesster2k10/react-native-range-slider';
 
 // ...
+const App = () => {
+  const onChange = (min: number, max: number) => {
+    console.log('min: ', min)
+    console.log('max: ', max)
+  }
 
-<RangeSlider
-  min={0}
-  max={100}
-  onChange={(min, max) => console.log(min, max)}
-/>;
+  return (
+  <RangeSlider
+    type="range" // ios only
+    min={0}
+    max={100}
+    selectedMinimum={20} // ios only
+    selectedMaximum={60} // ios only
+    tintColor="#ecf0f1"
+    handleColor="#f368e0"
+    handlePressedColor="#f368e0"
+    tintColorBetweenHandles="#ff9ff3"
+    onChange={onChange}
+  />
+  )
+}
 ```
 
 ## Props
@@ -189,10 +226,10 @@ import RangeSlider from '@jesster2k10/react-native-range-slider';
 
 ### Roadmap
 
-- Improve android customization abilities (fonts, handle size)
-- Improve documentation
-- Unit tests
-- Flow support
+- [ ] Improve android customization abilities (fonts, handle size)
+- [ ] Improve documentation
+- [ ] Unit tests
+- [ ] Flow support
 
 ### Contribution
 
