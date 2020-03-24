@@ -92,7 +92,7 @@ module.exports = {
 }
 ```
 
-### Step Four
+### Step Four
 
 Modify your `AndroidManifest.xml` and set `android:allowBackup="true"`, see below for example:
 
