@@ -24,14 +24,21 @@ class RangeSliderView(context: Context): LinearLayout(context) {
 
   init {
     inflate(context, R.layout.rn_range_slider, this)
-    slider = findViewById(R.id.rn_range_slider)
+    slider = findViewById(R.id.rn_discrete_slider)
+    slider.mode = DiscreteSlider.MODE_RANGE
   }
 
   fun setMinValue(min: Int) {
+    if (slider.mode != DiscreteSlider.MODE_RANGE) {
+      return
+    }
     slider.minProgress = min
   }
 
   fun setMaxValue(max: Int) {
+    if (slider.mode != DiscreteSlider.MODE_RANGE) {
+      return
+    }
     slider.maxProgress = max
   }
 
