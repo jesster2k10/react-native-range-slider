@@ -33,16 +33,10 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   labelPadding,
   minDistance,
   maxDistance,
-  leftHandleColor,
-  rightHandleColor,
-  leftHandlePressedColor,
-  rightHandlePressedColor,
+  labelColor,
+  labelFontSize,
   handlePressedColor,
-  minStartValue,
-  maxStartValue,
-  fixGap,
   style = {},
-  cornerRadius,
 }: RangeSliderProps) => {
   const defaultStyle = {
     width: '100%',
@@ -51,66 +45,49 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   const handleChange = ({ nativeEvent }: RangeSliderChangeEvent) => {
     onChange && onChange(nativeEvent.min, nativeEvent.max);
   };
+  const commonProps = {
+    minValue: Number(min),
+    maxValue: Number(max),
+    tintColor,
+    tintColorBetweenHandles,
+    handleColor,
+    handleDiameter,
+    suffix,
+    prefix,
+    disableRange: type !== 'range',
+    hideLabels,
+    step,
+    onChange: handleChange,
+    style: [defaultStyle, style],
+  };
+  const platformSpecificProps = Platform.select({
+    ios: {
+      selectedMaximum,
+      selectedMinimum,
+      handleBorderColor,
+      handleBorderWidth,
+      minLabelColor: minLabelColor || labelColor,
+      minLabelFont,
+      minLabelFontSize: minLabelFontSize || labelFontSize,
+      maxLabelColor: maxLabelColor || labelColor,
+      maxLabelFont,
+      maxLabelFontSize: maxLabelFontSize || labelFontSize,
+      lineHeight,
+      lineBorderWidth,
+      lineBorderColor,
+      labelPadding,
+      minDistance,
+      maxDistance,
+    },
+    android: {
+      labelColor,
+      labelFontSize,
+      handlePressedColor,
+    },
+    default: {},
+  });
 
-  if (Platform.OS === 'android') {
-    return (
-      <Slider
-        min={Number(min)}
-        max={Number(max)}
-        step={Number(step)}
-        tintColor={tintColor}
-        tintColorBetweenHandles={tintColorBetweenHandles}
-        handleColor={handleColor}
-        onChange={handleChange}
-        leftHandleColor={leftHandleColor}
-        rightHandleColor={rightHandleColor}
-        minStartValue={minStartValue}
-        maxStartValue={maxStartValue}
-        fixGap={fixGap}
-        leftHandlePressedColor={leftHandlePressedColor}
-        rightHandlePressedColor={rightHandlePressedColor}
-        handlePressedColor={handlePressedColor || handleColor}
-        cornerRadius={cornerRadius}
-        prefix={prefix}
-        suffix={suffix}
-        style={[defaultStyle, style]}
-      />
-    );
-  } else {
-    return (
-      <Slider
-        disableRange={type === 'slider'}
-        minValue={Number(min)}
-        maxValue={Number(max)}
-        step={Number(step)}
-        selectedMaximum={selectedMaximum}
-        selectedMinimum={selectedMinimum}
-        tintColor={tintColor}
-        tintColorBetweenHandles={tintColorBetweenHandles}
-        handleBorderColor={handleBorderColor}
-        handleBorderWidth={handleBorderWidth}
-        handleColor={handleColor}
-        handleDiameter={handleDiameter}
-        minLabelColour={minLabelColor}
-        minLabelFont={minLabelFont}
-        minLabelFontSize={minLabelFontSize}
-        maxLabelFont={maxLabelFont}
-        maxLabelFontSize={maxLabelFontSize}
-        maxLabelColour={maxLabelColor}
-        lineHeight={lineHeight}
-        lineBorderWidth={lineBorderWidth}
-        lineBorderColor={lineBorderColor}
-        prefix={prefix}
-        suffix={suffix}
-        hideLabels={hideLabels}
-        labelPadding={labelPadding}
-        minDistance={minDistance}
-        maxDistance={maxDistance}
-        onChange={handleChange}
-        style={[defaultStyle, style]}
-      />
-    );
-  }
+  return <Slider {...commonProps} {...platformSpecificProps} />;
 };
 
 RangeSlider.defaultProps = {

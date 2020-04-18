@@ -10,25 +10,28 @@ export type RangeSliderChangeEvent = NativeSyntheticEvent<{
 export interface CommonRangeSliderProps {
   min: number;
   max: number;
-  onChange?: (min: number, max: number) => void;
   tintColor?: string;
   tintColorBetweenHandles?: string;
-  step?: number;
   handleColor?: string;
+  handleDiameter?: number;
+  hideLabels?: boolean;
+  type?: 'slider' | 'range';
+  onChange?: (min: number, max: number) => void;
+  step?: number;
   style?: object;
   prefix?: string;
   suffix?: string;
+  labelColor?: string;
+  labelFontSize?: string;
 }
 
 export interface IOSOnlyRangeSliderProps {
-  type?: 'slider' | 'range';
   selectedMinimum: number;
   selectedMaximum: number;
   handleBorderColor?: string;
   handleBorderWidth?: number;
   minLabelColor?: string;
   maxLabelColor?: string;
-  handleDiameter?: number;
   lineHeight?: number;
   hideLabels?: boolean;
   minLabelFont?: string;
@@ -43,15 +46,7 @@ export interface IOSOnlyRangeSliderProps {
 }
 
 export interface AndroidOnlyRangeSliderProps {
-  leftHandleColor?: string;
-  rightHandleColor?: string;
-  leftHandlePressedColor?: string;
-  rightHandlePressedColor?: string;
   handlePressedColor?: string;
-  minStartValue?: number;
-  maxStartValue?: number;
-  fixGap?: number;
-  cornerRadius?: number;
 }
 
 export type RangeSliderProps = CommonRangeSliderProps &
