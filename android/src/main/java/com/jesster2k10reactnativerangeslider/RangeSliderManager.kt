@@ -46,9 +46,9 @@ class RangeSliderManager: SimpleViewManager<RangeSliderView>() {
   }
 
   @ReactProp(name = "labelFontSize")
-  fun setLabelFontSize(view: RangeSliderView, size: Float?) {
+  fun setLabelFontSize(view: RangeSliderView, size: Int?) {
     if (size == null) return
-    view.run { setLabelFontSize(size) }
+    view.run { setLabelFontSize(size.toFloat()) }
   }
 
   @ReactProp(name = "handleColor")
@@ -64,9 +64,9 @@ class RangeSliderManager: SimpleViewManager<RangeSliderView>() {
   }
 
   @ReactProp(name = "handleDiameter")
-  fun setHandleDiameter(view: RangeSliderView, diameter: Float?) {
+  fun setHandleDiameter(view: RangeSliderView, diameter: Int?) {
     if (diameter == null) return
-    view.run { setHandleDiameter(diameter) }
+    view.run { setHandleDiameter(diameter.toFloat()) }
   }
 
   @ReactProp(name = "suffix")
