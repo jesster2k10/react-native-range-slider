@@ -23,11 +23,11 @@ export interface CommonRangeSliderProps {
   suffix?: string;
   labelColor?: string;
   labelFontSize?: string;
+  selectedMinimum?: number;
+  selectedMaximum?: number;
 }
 
 export interface IOSOnlyRangeSliderProps {
-  selectedMinimum: number;
-  selectedMaximum: number;
   handleBorderColor?: string;
   handleBorderWidth?: number;
   minLabelColor?: string;

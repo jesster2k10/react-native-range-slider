@@ -3,6 +3,8 @@ package com.jesster2k10reactnativerangeslider
 import android.content.Context
 import android.graphics.Color
 import android.widget.LinearLayout
+import com.facebook.react.bridge.ReactContext
+import com.facebook.react.uimanager.UIManagerModule
 import hearsilent.discreteslider.DiscreteSlider
 import hearsilent.discreteslider.DiscreteSlider.ValueLabelFormatter
 import hearsilent.discreteslider.libs.Utils
@@ -22,24 +24,52 @@ class RangeSliderView(context: Context): LinearLayout(context) {
       updateLabelFormatter()
     }
 
+  private var step: Int? = null
+  private var min: Int = 0
+
   init {
     inflate(context, R.layout.rn_range_slider, this)
     slider = findViewById(R.id.rn_discrete_slider)
     slider.mode = DiscreteSlider.MODE_RANGE
+    slider.setOnValueChangedListener(object: DiscreteSlider.OnValueChangedListener() {
+      override fun onValueChanged(minProgress: Int, maxProgress: Int, fromUser: Boolean) {
+        super.onValueChanged(minProgress, maxProgress, fromUser)
+        val event = RangeSliderChangeEvent(slider.id)
+        event.max = maxProgress.toDouble() + min.toDouble()
+        event.min = minProgress.toDouble() + min.toDouble()
+
+        val reactContext = context as ReactContext
+        reactContext.getNativeModule(UIManagerModule::class.java).eventDispatcher.dispatchEvent(
+          event
+        )
+      }
+    })
   }
 
-  fun setMinValue(min: Int) {
+  fun setSelectedMinimum(min: Int) {
     if (slider.mode != DiscreteSlider.MODE_RANGE) {
       return
     }
     slider.minProgress = min
   }
 
-  fun setMaxValue(max: Int) {
+  fun setSelectedMaximum(max: Int) {
     if (slider.mode != DiscreteSlider.MODE_RANGE) {
       return
     }
     slider.maxProgress = max
+  }
+
+  fun setMinValue(min: Int) {
+    this.min = min
+    updateLabelFormatter()
+  }
+
+  fun setMaxValue(max: Int) {
+    if (slider.mode != DiscreteSlider.MODE_RANGE) {
+      return
+    }
+    slider.count = max
   }
 
   fun setDisableRange(disableRange: Boolean) {
@@ -89,13 +119,22 @@ class RangeSliderView(context: Context): LinearLayout(context) {
   }
 
   fun setStep(step: Int) {
+    val max = slider.count - 1
+    val factor = step % max
+    if (factor !== 0) return
+    this.step = step
     slider.tickMarkStep = step
   }
 
   private fun updateLabelFormatter() {
     slider.valueLabelFormatter = object : ValueLabelFormatter() {
       override fun getLabel(input: Int): String? {
-        var formatted = input.toString()
+        var number = input
+        val min = min
+        if (min !== null) {
+          number += min
+        }
+        var formatted = number.toString()
         if (prefix !== null) {
           formatted = prefix + formatted
         }

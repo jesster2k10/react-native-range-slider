@@ -40,14 +40,16 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
 }: RangeSliderProps) => {
   const defaultStyle = {
     width: '100%',
-    height: 70,
+    height: Platform.select({
+      ios: 70,
+      android: 120,
+    }),
   };
   const handleChange = ({ nativeEvent }: RangeSliderChangeEvent) => {
     onChange && onChange(nativeEvent.min, nativeEvent.max);
   };
   const commonProps = {
     minValue: Number(min),
-    maxValue: Number(max),
     tintColor,
     tintColorBetweenHandles,
     handleColor,
@@ -58,14 +60,15 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     hideLabels,
     step,
     onChange: handleChange,
+    selectedMinimum: selectedMinimum || min,
+    selectedMaximum: selectedMaximum || max,
     style: [defaultStyle, style],
   };
   const platformSpecificProps = Platform.select({
     ios: {
-      selectedMaximum,
-      selectedMinimum,
       handleBorderColor,
       handleBorderWidth,
+      maxValue: Number(max),
       minLabelColor: minLabelColor || labelColor,
       minLabelFont,
       minLabelFontSize: minLabelFontSize || labelFontSize,
@@ -83,6 +86,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
       labelColor,
       labelFontSize,
       handlePressedColor,
+      maxValue: Number(max) - Number(min || 0),
     },
     default: {},
   });

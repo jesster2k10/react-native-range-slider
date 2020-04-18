@@ -27,6 +27,18 @@ class RangeSliderManager: SimpleViewManager<RangeSliderView>() {
     view.run { setMaxValue(max) }
   }
 
+  @ReactProp(name = "selectedMinimum")
+  fun setSelectedMinimum(view: RangeSliderView, min: Int?) {
+    if (min == null) return
+    view.setSelectedMinimum(min)
+  }
+
+  @ReactProp(name = "selectedMaximum")
+  fun setSelectedMaximum(view: RangeSliderView, max: Int?) {
+    if (max == null) return
+    view.setSelectedMaximum(max)
+  }
+
   @ReactProp(name = "tintColor")
   fun setTintColor(view: RangeSliderView, color: String?) {
     if (color == null) return
