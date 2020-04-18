@@ -16,6 +16,8 @@ const AndroidApp = () => {
           <RangeSlider
             min={0}
             max={100}
+            selectedMinimum={20}
+            selectedMaximum={100}
             onChange={onChange}
             style={styles.slider}
           />
@@ -23,9 +25,10 @@ const AndroidApp = () => {
         <View>
           <Text style={styles.title}>Custom Range & Step</Text>
           <RangeSlider
-            min={50}
-            step={50}
-            max={300}
+            min={100}
+            max={500}
+            selectedMinimum={120}
+            selectedMaximum={400}
             tintColor="#ecf0f1"
             handleColor="#f368e0"
             handlePressedColor="#f368e0"
@@ -37,8 +40,10 @@ const AndroidApp = () => {
         <View>
           <Text style={styles.title}>Customized Colors</Text>
           <RangeSlider
-            min={55}
-            max={133}
+            min={0}
+            max={150}
+            selectedMinimum={50}
+            selectedMaximum={100}
             handleColor="#3498db"
             handlePressedColor="#2980b9"
             tintColor="#ecf0f1"
@@ -75,13 +80,9 @@ const AndroidApp = () => {
             type="slider"
             min={0}
             max={100}
-            leftHandleColor="#00b894"
-            rightHandleColor="#00cec9"
-            leftHandlePressedColor="#55efc4"
-            rightHandlePressedColor="#81ecec"
+            handleColor="#00b894"
+            handlePressedColor="#81ecec"
             onChange={onChange}
-            selectedMinimum={20}
-            selectedMaximum={40}
             style={styles.slider}
           />
         </View>
