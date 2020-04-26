@@ -97,7 +97,7 @@ class RNRangeSliderView(context: Context): LinearLayout(context), OnRangeSeekbar
   }
 
   fun setMaxStartValue(maxStartValue: Float) {
-    rangeSeekBar.setMinStartValue(maxStartValue)
+    rangeSeekBar.setMaxStartValue(maxStartValue)
   }
 
   fun setFixGap(gap: Float) {
