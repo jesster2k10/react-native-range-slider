@@ -37,6 +37,7 @@
     float _selectedMaximum;
     NSString *myPrefix;
     NSString *mySuffix;
+    float _step;
     
     float _minLabelFontSize;
     float _maxLabelFontSize;
@@ -227,6 +228,8 @@
         _rangeSlider.maxValue = _maxValue ? _maxValue : 100;
         _rangeSlider.selectedMinimum = _selectedMinimum;
         _rangeSlider.selectedMaximum = _selectedMaximum;
+        _rangeSlider.enableStep = true;
+        _rangeSlider.step = _step;
 
         // _rangeSlider.minDistance = -1; // distance between selectedMin_selected_max
         // _rangeSlider.handleColor = [UIColor colorWithRed:0.23 green:0.75 blue:0.43 alpha:1.0];
